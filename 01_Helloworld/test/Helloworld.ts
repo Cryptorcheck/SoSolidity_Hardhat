@@ -19,8 +19,11 @@ describe("Helloworld", function () {
 
     // 将编译后的合约加载到变量
     // ethers.getContractFactory通过artifacts/contracts/Helloworld.sol/Helloworld.json找到
-    // hardhat框架会在本地启动一个区块链测试网络用于合约部署
+    
+
+    // 找到合约构造方法
     const Helloworld = await ethers.getContractFactory("Helloworld");
+    // hardhat框架会在本地启动一个区块链测试网络用于合约部署
     const instance = await Helloworld.deploy();
 
     // 等待多个区块链节点确认后最终部署上链
