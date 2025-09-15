@@ -6,7 +6,7 @@ const webpack = require("webpack");
 const path = require("path");
 
 module.exports = {
-  entry: "./src/connect_metamask/index.ts",
+  entry: "./src/index.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
