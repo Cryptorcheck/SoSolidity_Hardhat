@@ -61,3 +61,11 @@ eth_call
   - 需要输入启动网络时返回的rpc地址
 - 在Metamask中添加该网络的测试账号
   - 将启动网络时返回的测试账号通过私钥导入钱包
+
+### 回顾调用过程
+- hardhat编译合约生成json中的abi接口和bytecode
+- deploy脚本通过hardhat访问json中的bytecode，将之部署在区块链网络中
+- metamask连接到区块链网络
+- ethers通过metamask调用在区块链网络上的合约 
+- 合约在区块链网络上执行后返回结果到metamask
+- metamask返回结果给浏览器

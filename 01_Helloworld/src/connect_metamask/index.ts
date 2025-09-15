@@ -5,7 +5,7 @@ import { ethers, type Eip1193Provider} from "ethers"
 function getEth(): Eip1193Provider {
   const eth = window.ethereum;
 
-  if (!eth) {
+  if (!eth) { 
     throw new Error("No ethereum provider")
   }
 
@@ -34,11 +34,15 @@ async function getContract() {
 
   const provider = new ethers.BrowserProvider(getEth());
 
-  const contractAddr = "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512"
+  console.log('process.env.CONTRACT_ADDR: ',process.env.CONTRACT_ADDR);
   
-  const contract = new ethers.Contract(contractAddr, [
+  const contract = new ethers.Contract(process.env.CONTRACT_ADDR, [
     "function hello() public pure returns (string memory)"
   ], provider);
 
-  await contract.hello();
+  document.body.innerHTML = (await contract.hello()) + " init";
 }
+
+(async function main () {
+  await getContract();
+})();
