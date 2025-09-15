@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
@@ -16,21 +17,26 @@
     "@nomicfoundation/hardhat-verify": "^2.0.0",
     "@typechain/ethers-v6": "^0.5.0",
     "@typechain/hardhat": "^9.0.0",
+    "@types/minimatch": "^6.0.0",
     "@types/mocha": "^10.0.10",
     "chai": "^4.2.0",
+    "css-loader": "^7.1.2",
     "dotenv": "^17.2.2",
     "ethers": "^6.15.0",
     "hardhat": "^2.14.0",
     "hardhat-gas-reporter": "^2.3.0",
     "html-webpack-plugin": "^5.6.4",
+    "minimatch": "^10.0.3",
     "solidity-coverage": "^0.8.0",
+    "style-loader": "^4.0.0",
     "ts-loader": "^9.5.4",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.0",
     "typescript": "^5.9.2",
     "webpack": "^5.101.3",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.2"
+    "webpack-dev-server": "^5.2.2",
+    "webpack-merge": "^6.0.1"
   },
   "dependencies": {
     "@metamask/providers": "^22.1.1"

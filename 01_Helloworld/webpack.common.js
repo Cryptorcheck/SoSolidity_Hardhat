@@ -14,7 +14,6 @@ module.exports = {
   resolve: {
     extensions: [".js", ".ts", ".json"],
   },
-  mode: "development",
   module: {
     rules: [
       {
@@ -37,10 +36,4 @@ module.exports = {
       "process.env.CONTRACT_ADDR": JSON.stringify(process.env.CONTRACT_ADDR),
     }),
   ],
-
-  devServer: {
-    historyApiFallback: true,
-    port: 8080,
-    hot: true,
-  },
 };
