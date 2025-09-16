@@ -8,16 +8,17 @@ export default async function modifyStateAndWaitTxComplete () {
   const provider = new ethers.BrowserProvider(getEth());
 
   const contract = new ethers.Contract(
-    process.env.CONTRACT_ADDR, 
+    process.env.CONTRACT_ADDR_02, 
     [
       "function counter() external",
-      "function getCount() external view returns (uint)"
+      "function getCount() external view returns (uint)",
     ], 
     // provider, // provider，提供区块链网络连接中介
     await provider.getSigner()// signer，提供支付交易费的账号
   );
 
   const display = document.createElement("div");
+  const btn = document.createElement("button");
 
   async function getCount() {
     display.innerHTML = await contract.getCount();
@@ -28,7 +29,6 @@ export default async function modifyStateAndWaitTxComplete () {
     await tx.wait(); // 等待交易完成
   }
   
-  const btn = document.createElement("button");
 
   btn.innerHTML = "setCount";
   btn.onclick = async function() {

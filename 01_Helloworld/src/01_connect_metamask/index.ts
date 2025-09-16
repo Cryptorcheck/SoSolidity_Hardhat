@@ -8,7 +8,7 @@ export default async function connectWalletAndHello() {
     const provider = new ethers.BrowserProvider(getEth());
   
     const contract = new ethers.Contract(
-      process.env.CONTRACT_ADDR, 
+      process.env.CONTRACT_ADDR_01, 
       [
         "function counter() external",
         "function getCount() external view returns (uint)"

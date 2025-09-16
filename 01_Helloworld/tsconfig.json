@@ -5,6 +5,7 @@
     "module": "commonjs",
     "lib": ["dom", "es2015", "es2016", "es2017"],
     "moduleResolution": "node", // 使用 Node.js 的方式查找模块[1](@ref)
+    "resolveJsonModule": true,  
     "esModuleInterop": true, // 改善 CommonJS/AMD/UMD 模块的互操作性
     "strict": false, // 是否启用所有严格类型检查选项（根据项目需要调整）
     "skipLibCheck": true, // 跳过声明文件的类型检查，可加快编译速度

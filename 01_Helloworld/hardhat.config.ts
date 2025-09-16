@@ -13,6 +13,9 @@ const config: HardhatUserConfig  = {
     //   url: 'xxx',
     //   accounts: [process.env.PRIVATE_KEY]
     // }
+  },
+  gasReporter: {
+    enabled: true, // yarn add -D hardhat-gas-reporter
   }
 };
 

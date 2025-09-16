@@ -33,7 +33,15 @@ module.exports = {
       inject: "body",
     }),
     new webpack.DefinePlugin({
-      "process.env.CONTRACT_ADDR": JSON.stringify(process.env.CONTRACT_ADDR),
+      "process.env.CONTRACT_ADDR_01": JSON.stringify(
+        process.env.CONTRACT_ADDR_01
+      ),
+      "process.env.CONTRACT_ADDR_02": JSON.stringify(
+        process.env.CONTRACT_ADDR_02
+      ),
+      "process.env.CONTRACT_ADDR_03": JSON.stringify(
+        process.env.CONTRACT_ADDR_03
+      ),
     }),
   ],
 };

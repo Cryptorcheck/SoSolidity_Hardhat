@@ -5,10 +5,12 @@ import "hardhat/console.sol";
 
 contract Counter {
     uint public count;
+    event CounterChange(uint count);
 
     function counter() external {
         count++;
         console.log("count: ", count);
+        emit CounterChange(count);
     }
 
     function getCount() external view returns (uint) {
