@@ -16,6 +16,11 @@ const config: HardhatUserConfig  = {
   },
   gasReporter: {
     enabled: true, // yarn add -D hardhat-gas-reporter
+  },
+  verify: {
+    etherscan: {
+      apiKey: ""
+    }
   }
 };
 

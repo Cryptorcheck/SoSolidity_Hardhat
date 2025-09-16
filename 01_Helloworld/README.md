@@ -69,3 +69,30 @@ eth_call
 - ethers通过metamask调用在区块链网络上的合约 
 - 合约在区块链网络上执行后返回结果到metamask
 - metamask返回结果给浏览器
+
+
+# 合约验证
+## 安装插件
+```bash
+yarn add -D nomicfoundation/hardhat-verify 
+```
+
+## 配置测试网络验证APIKEY
+```javascript
+// hardhat.config.js
+// api key 从ETHERSCAN官网获取
+const config = {
+  // ...
+  verify: {
+    etherscan: {
+      apiKey: "ETHERSCAN_API_KEY"
+    }
+  }
+}
+
+```
+
+## 验证
+```bash
+yarn hardhat verify --network ${NETWORK} ${CONTRACT_ADDR}
+```
