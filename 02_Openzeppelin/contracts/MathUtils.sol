@@ -8,7 +8,10 @@ contract MathUtils {
         Math.tryAdd(a, b);
     }
 
+    using Math for uint256;
+
     function sum2(uint a, uint b) public pure {
-        Math.tryAdd(a, b);
+        // Math.tryAdd(a, b);
+        a.tryAdd(b);
     }
 }
