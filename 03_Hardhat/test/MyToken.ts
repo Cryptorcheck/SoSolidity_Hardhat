@@ -10,11 +10,15 @@ describe("", () => {
   beforeEach(async () => {
     const MyToken = await ethers.getContractFactory("MyToken");
 
-    // 使用deploy方法，不指定部署账号直接部署合约
-    // 默认会使用hardhat中的测试account1
-    // 可通过 await ethers.getSigners() 获取hardhat中的测试账号列表
-    // 那么，在MyToken合约构造函数中的msg.sender即为hardhat中的测试account1
-    // 根据MyToken合约的构造函数可得知，此时MyToken合约中测试account1的balance应该为initialSupply
+    /**
+     * FIXME:
+     * 使用deploy方法，不指定部署账号直接部署合约
+     * 默认会使用hardhat中的测试account1
+     * 可通过 await ethers.getSigners() 获取hardhat中的测试账号列表
+     * 那么，在MyToken合约构造函数中的msg.sender即为hardhat中的测试account1
+     * 根据MyToken合约的构造函数可得知，此时MyToken合约中测试account1的balance应该为initialSupply
+     * FIXME: 如果希望指定账户部署合约，可以使用 MyToken.connect(account).deploy(initialSupply)
+     */
     contract = await MyToken.deploy(initialSupply);
     await contract.waitForDeployment();
 
@@ -25,7 +29,7 @@ describe("", () => {
     expect(addr).to.length.greaterThan(0);
   });
 
-  it("验证合约name,symbol,decimals并测试转帐", async() => {
+  it("验证合约name,symbol,decimals、检查账户余额", async() => {
     console.log("\n验证合约数据");
     // name、symbol、decimals都是ERC20的内置方法
     const name = await (contract as any).name();
@@ -39,7 +43,7 @@ describe("", () => {
     expect(symbol).to.equal("MTK");
     expect(decimals).to.equal(18);
 
-    console.log("\n测试转帐");
+    console.log("\n检查账户余额");
     // 在部署合约时会mint数额为initialSupply的代币到部署合约的账户
     // 现在来验证一下
     const [acc01] = await ethers.getSigners();
@@ -53,7 +57,18 @@ describe("", () => {
     expect(acc01.address).to.equal(owner);
   })
 
-  // it("测试转帐", async () => {
+  it("测试转帐", async () => {
+    console.log("\n测试转帐");
+
+    const [acc01, acc02] = await ethers.getSigners();
+    // acc01转帐给acc02，因为acc01为默认connect到合约的账户
+    const res = await (contract as any).transfer(acc02, initialSupply / 2);
+    console.log("res: ",res);
     
-  // })
+    const balanceOfAcc01 = await (contract as any).balanceOf(acc01);
+    const balanceOfAcc02 = await (contract as any).balanceOf(acc02);
+
+    console.log("balanceOfAcc01: ",balanceOfAcc01);
+    console.log("balanceOfAcc02: ",balanceOfAcc02);
+  })
 });
