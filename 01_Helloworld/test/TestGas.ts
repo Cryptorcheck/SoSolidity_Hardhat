@@ -13,6 +13,7 @@ describe("TestGas", function () {
     // 找到合约构造方法
     const TestGas = await ethers.getContractFactory("TestGas");
     // hardhat框架会在本地启动一个区块链测试网络用于合约部署
+    // 如果合约的构造函数有参数，需要在deploy方法中传入
     const instance = await TestGas.deploy();
 
     // 等待多个区块链节点确认后最终部署上链

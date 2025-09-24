@@ -15,7 +15,7 @@ const config: HardhatUserConfig  = {
     },
     sepolia_eth: { // 其他自定义名称映射到自定义网络: npx hardhat run xxx --network sepolia_eth
       url: 'https://sepolia.infura.io/v3/713bf3dc57364dfabf30310b6883c46d',
-      accounts: ["0x36F376040Ade6ABC0B02803b0D80F1b5bc5361a5"]
+      accounts: ["f6a7bf23cebfa4847fc7a38e3e1c3bbdbb87fea064125368febafd579480bc75"]
     }
   },
   gasReporter: {
