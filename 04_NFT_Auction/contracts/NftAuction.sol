@@ -7,7 +7,7 @@ contract NftAuction {
         uint duration;
         uint startPrice;
         bool isEnded;
-        address highestBidder;
+        address highestBidder; // 最高出价人
         uint highestBid;
     }
 
@@ -20,6 +20,11 @@ contract NftAuction {
         admin = msg.sender;
     }
 
+    event StartAuction();
+    event Bid(address indexed sender, uint amount);
+    event Withdraw(address indexed sender, uint amount);
+    event End(address indexed _highestBidder, uint _highestBid);
+
     modifier onlyAdmin() {
         require(msg.sender == admin, "no authorized");
         _;
@@ -27,7 +32,8 @@ contract NftAuction {
 
     // 创建拍卖
     function createAuction(uint _dur, uint _startPrice) external onlyAdmin {
-        require(_dur > 60 seconds, "_dur must be greater than 1 min");
+        require(_dur > 60 seconds, "duration must be greater than 1 min");
+        require(_startPrice >= 0, "start price must be greater than 0");
         auctions[nextAuctionId] = Auction({
             seller: msg.sender,
             duration: _dur,
