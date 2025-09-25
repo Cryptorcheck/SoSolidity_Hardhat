@@ -59,6 +59,7 @@ contract NftAuction {
         nextAuctionId++;
     }
 
+    // 开始拍卖
     function start(
         uint auctionId
     ) external onlyAuctionOwner(auctionId) isAuctionStarted(auctionId) {
