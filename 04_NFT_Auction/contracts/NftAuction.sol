@@ -20,6 +20,22 @@ contract NftAuction {
         admin = msg.sender;
     }
 
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "no authorized");
+        _;
+    }
+
     // 创建拍卖
-    function createAuction() external {}
+    function createAuction(uint _dur, uint _startPrice) external onlyAdmin {
+        require(_dur > 60 seconds, "_dur must be greater than 1 min");
+        auctions[nextAuctionId] = Auction({
+            seller: msg.sender,
+            duration: _dur,
+            startPrice: _startPrice,
+            isEnded: false,
+            highestBid: 0,
+            highestBidder: address(0)
+        });
+        nextAuctionId++;
+    }
 }
