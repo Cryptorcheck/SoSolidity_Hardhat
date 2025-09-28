@@ -42,6 +42,11 @@ contract NftAuction {
         _;
     }
 
+    modifier isAuctionEnded(uint id) {
+        require(!auctions[id].isEnded, "auction has expired");
+        _;
+    }
+
     // 创建拍卖
     function createAuction(uint _dur, uint _startPrice) external onlyAdmin {
         require(_dur > 60 seconds, "duration must be greater than 1 min");
@@ -60,14 +65,26 @@ contract NftAuction {
     }
 
     // 开始拍卖
-    function start(
-        uint auctionId
-    ) external onlyAuctionOwner(auctionId) isAuctionStarted(auctionId) {
-        auctions[auctionId].isStarted = true;
-        auctions[auctionId].expiredAt = uint32(
-            block.timestamp + auctions[auctionId].duration
-        );
+    function start(uint auctionId) external onlyAuctionOwner(auctionId) {
+        require(!auctions[auctionId].isStarted, "auction has started");
+        Auction storage auction = auctions[auctionId];
+        auction.isStarted = true;
+        auction.expiredAt = uint32(block.timestamp + auction.duration);
+
+        // TODO: transferFrom
 
         emit StartAuction(auctionId);
+    }
+
+    // 买家竞价
+    function bid(
+        uint auctionId
+    ) external payable isAuctionStarted(auctionId) isAuctionEnded(auctionId) {
+        Auction storage auction = auctions[auctionId];
+        if (auction.highestBidder != address(0)) {
+            payable(auction.highestBidder).transfer(auction.highestBid);
+        }
+        auction.highestBidder = msg.sender;
+        auction.highestBid = msg.value;
     }
 }
