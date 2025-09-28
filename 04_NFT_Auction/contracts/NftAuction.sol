@@ -3,6 +3,8 @@ pragma solidity 0.8.28;
 
 contract NftAuction {
     struct Auction {
+        address nftAddr;
+        uint nftId;
         address seller;
         uint duration;
         uint startPrice;
@@ -48,10 +50,17 @@ contract NftAuction {
     }
 
     // 创建拍卖
-    function createAuction(uint _dur, uint _startPrice) external onlyAdmin {
+    function createAuction(
+        uint _dur,
+        uint _startPrice,
+        uint _tokenId,
+        address _nftAddr
+    ) external onlyAdmin {
         require(_dur > 60 seconds, "duration must be greater than 1 min");
         require(_startPrice >= 0, "start price must be greater than 0");
         auctions[nextAuctionId] = Auction({
+            nftAddr: _nftAddr,
+            nftId: _tokenId,
             seller: msg.sender,
             duration: _dur,
             startPrice: _startPrice,
