@@ -1,0 +1,20 @@
+{
+  "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+  "abi": [
+    "error InvalidInitialization()",
+    "error NotInitializing()",
+    "event Bid(address indexed sender, uint256 amount)",
+    "event End(address indexed _highestBidder, uint256 _highestBid)",
+    "event Initialized(uint64 version)",
+    "event StartAuction(uint256 indexed id)",
+    "event Withdraw(address indexed sender, uint256 amount)",
+    "function admin() view returns (address)",
+    "function auctions(uint256 id) view returns (address nftAddr, uint256 nftId, address seller, uint256 duration, uint256 startPrice, bool isStarted, bool isEnded, uint32 expiredAt, address highestBidder, uint256 highestBid)",
+    "function bid(uint256 auctionId) payable",
+    "function createAuction(uint256 _dur, uint256 _startPrice, address _nftAddr, uint256 _tokenId)",
+    "function initialize()",
+    "function nextAuctionId() view returns (uint256)",
+    "function start(uint256 auctionId)"
+  ],
+  "numDeployments": 1
+}
