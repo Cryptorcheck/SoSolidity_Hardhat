@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity 0.8.28;
 
-contract NftAuction {
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+
+contract NftAuction is Initializable {
     struct Auction {
         address nftAddr;
         uint nftId;
@@ -20,7 +22,10 @@ contract NftAuction {
     mapping(uint id => Auction) public auctions;
     uint public nextAuctionId;
 
-    constructor() {
+    // constructor() {
+    //     admin = msg.sender;
+    // }
+    function initialize() public initializer {
         admin = msg.sender;
     }
 
@@ -53,8 +58,8 @@ contract NftAuction {
     function createAuction(
         uint _dur,
         uint _startPrice,
-        uint _tokenId,
-        address _nftAddr
+        address _nftAddr,
+        uint _tokenId
     ) external onlyAdmin {
         require(_dur > 60 seconds, "duration must be greater than 1 min");
         require(_startPrice >= 0, "start price must be greater than 0");
