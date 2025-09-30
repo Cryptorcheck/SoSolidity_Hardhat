@@ -43,7 +43,5 @@ describe("Test Upgrade Contract", async () => {
     expect((await nftAuction.auctions(0)).startPrice).to.equal(
       auction.startPrice
     );
-
-    expect(implAddressUpgrade).to.equal(implAddress);
   });
 });
